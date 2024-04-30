@@ -9,4 +9,26 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  
+ <!--  
+  <servlet> (컨트롤러 이렇게 만들면 됨)
+  	<servlet-name>Test8</servlet-name>
+  	<servlet-class>study.j0424.Test8</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Test8</servlet-name>
+  	<url-pattern>/T8</url-pattern>
+  </servlet-mapping>
+   -->
+  
+  <!-- Filter 처리 (Controller 앞단에서 제어(처리)한다.) -->
+  <filter>
+    <filter-name>filterTest</filter-name>
+    <filter-class>filter.FilterTest</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>filterTest</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
 </web-app>

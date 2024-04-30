@@ -23,6 +23,7 @@ public class T5_StorageTestOk extends HttpServlet {
 		
 		// 어플리케이션 객체 생성
 		ServletContext application = session.getServletContext();
+		
 		application.setAttribute("aMid", mid);
 		
 		response.sendRedirect(request.getContextPath()+"/study/0427_storage/t5_StorageTest.jsp"); 

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-  String mid = session.getAttribute("sMid")==null ? "" : (String) session.getAttribute("sMid");
+  String mid_ = session.getAttribute("sMid")==null ? "" : (String) session.getAttribute("sMid");
 %>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <%-- <a class="navbar-brand" href="<%=request.getContextPath()%>/">Home</a> --%>
@@ -13,7 +13,7 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Guest</a>
       </li>
-<%    if(!mid.equals("")) { %>
+<%    if(!mid_.equals("")) { %>
       <li class="nav-item">
         <a class="nav-link" href="#">Board</a>
       </li>
@@ -32,13 +32,16 @@
 			      <a class="dropdown-item" href="<%=request.getContextPath()%>/study/0427_storage/t2_Session.jsp">세션연습</a>
 			      <a class="dropdown-item" href="<%=request.getContextPath()%>/study/0427_storage/t3_Application.jsp">어플리케이션연습</a>
 			      <a class="dropdown-item" href="<%=request.getContextPath()%>/study/0427_storage/t4_StorageTest.jsp">Storage연습</a>
-			      <a class="dropdown-item" href="<%=request.getContextPath()%>/study/homework/ex1_Login.jsp">아이디저장연습</a>
+			      <a class="dropdown-item" href="<%=request.getContextPath()%>/study/homework/선생님/ex1_Login.jsp">아이디저장연습(수정필요)</a>
+			      <a class="dropdown-item" href="<%=request.getContextPath()%>/study/0429_JSTL/el1.jsp">EL연습</a>
+			      <a class="dropdown-item" href="<%=request.getContextPath()%>/study/0429_JSTL/jstl1.jsp?jumsu=85&code=K">JSTL연습</a>
+			      <a class="dropdown-item" href="<%=request.getContextPath()%>/study/0430_web_xml/filter/t1_Filtre.jsp">Filter 한글연습</a>
 			    </div>
 			  </div>
       </li>
 <%    } %>
       <li class="nav-item">
-<%    if(!mid.equals("")) { %>
+<%    if(!mid_.equals("")) { %>
         <a class="nav-link" href="${pageContext.request.contextPath}/j0427/Logout">Logout</a>
 <%    } else { %>
         <a class="nav-link" href="<%=request.getContextPath()%>/study/0428_Login/login.jsp">Login</a>
