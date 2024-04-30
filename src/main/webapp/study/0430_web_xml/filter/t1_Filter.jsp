@@ -13,7 +13,7 @@
 <jsp:include page="/include/nav.jsp" />
 <p><br/></p>
 <div class="container">
-  <h2>Filter 한글처리 연습입니다2222...</h2>
+  <h2>Filter 한글처리 연습입니다3333번...</h2>
   <form name="myform" method="post">
   	<div><input type="text" name="content" value="간단한 소개입니다." class="form-control" autofocus /></div>
   	<div><textarea rows="5" name="introduce" value="사이트 소개입니다." class="form-control"></textarea></div>
