@@ -26,11 +26,14 @@
     <div class="col-sm-4">
       <h2>About Me</h2>
       <h5>Photo of me:</h5>
-      <div class="fakeimg">Fake Image</div>
+      <!-- <div class="fakeimg">Fake Image</div> -->
+     	<img src="homepage_images/8.jpg" alt="img1" width="350px" height="200px">
       <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
-      <h3>Some Links</h3>
-      <p>Lorem ipsum dolor sit ame.</p>
-      <ul class="nav nav-pills flex-column">
+      <h3>New members</h3>
+      <%@ include file = "../../study/homework/newMemberTable.jsp" %>
+      
+    <p>신규 가입 회원 5명의 정보입니다.</p> 
+    <!--   <ul class="nav nav-pills flex-column">
         <li class="nav-item">
           <a class="nav-link active" href="#">Active</a>
         </li>
@@ -43,7 +46,7 @@
         <li class="nav-item">
           <a class="nav-link disabled" href="#">Disabled</a>
         </li>
-      </ul>
+      </ul> -->
       <hr class="d-sm-none">
     </div>
     <div class="col-sm-8">
