@@ -135,27 +135,32 @@ public class LoginDAO {
 		return res;
 	}
 
+	// 신규가입회원 5명 보여주기
 	public ArrayList<LoginVO> getnewMemberList() {
-		ArrayList<LoginVO> vos2 = new ArrayList<LoginVO>();
-		try {
-			sql = "select * from hoewon order by idx desc limit 5";
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				vo = new LoginVO();
-				vo.setMid(rs.getString("mid"));
-				vo.setName(rs.getString("name"));
-				vo.setAge(rs.getInt("age"));
-				vo.setGender(rs.getString("gender"));
-				vo.setAddress(rs.getString("address"));	
-				vos2.add(vo);
-			}
-		} catch (SQLException e) {
-			System.out.println("SQL 오류 : " + e.getMessage());
-		} finally {
-			rsClose();
-		}
-		return vos2;
+    ArrayList<LoginVO> vos = new ArrayList<LoginVO>();
+    
+    try {
+        sql = "select * from hoewon order by idx desc limit 5";
+        pstmt = conn.prepareStatement(sql);
+        rs = pstmt.executeQuery();
+        
+        while(rs.next()) {
+            vo = new LoginVO();
+            vo.setIdx(rs.getInt("idx"));
+            vo.setMid(rs.getString("mid"));
+            vo.setPwd(rs.getString("pwd"));
+            vo.setName(rs.getString("name"));
+            vo.setAge(rs.getInt("age"));
+            vo.setGender(rs.getString("gender"));
+            vo.setAddress(rs.getString("address"));
+            vos.add(vo);
+        }
+    } catch (SQLException e) {
+        System.out.println("SQL 오류 : " + e.getMessage());
+    } finally {
+        rsClose();
+    }
+    return vos;
 	}
+
 }

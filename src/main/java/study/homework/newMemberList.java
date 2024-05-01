@@ -19,10 +19,10 @@ public class newMemberList extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		LoginDAO dao = new LoginDAO();
 		
-		ArrayList<LoginVO> vos2 = dao.getnewMemberList();
-		request.setAttribute("vos2", vos2);
+		ArrayList<LoginVO> vos = dao.getnewMemberList();
+		request.setAttribute("vos", vos);
 		
-		String viewPage = "/study/homework/newMemberTable.jsp";
+		String viewPage = "../study/homework/newMemberTable.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
 	}
