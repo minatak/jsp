@@ -1,4 +1,4 @@
-package study.homework;
+package common;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,17 +13,18 @@ import javax.servlet.http.HttpServletResponse;
 import study.database.LoginDAO;
 import study.database.LoginVO;
 
-@WebServlet("/study/homework/newMemberList")
-public class newMemberList extends HttpServlet {
+@WebServlet("/Main")
+public class Main extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		LoginDAO dao = new LoginDAO();
+
+		ArrayList<LoginVO> recentVos = dao.getnewMemberList();
+		/* System.out.println("recentVos2 : " + recentVos); */
+		request.setAttribute("recentVos", recentVos);
 		
-		ArrayList<LoginVO> vos = dao.getnewMemberList();
-		request.setAttribute("vos", vos);
-		//System.out.println("vos: " + vos);
-		String viewPage = "../study/homework/newMemberTable.jsp";
+		String viewPage = "/main/main.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
-		dispatcher.forward(request, response);
+		dispatcher.forward(request, response);;
 	}
 }

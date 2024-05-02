@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<div id="header" class="jumbotron text-center" style="margin-bottom:0;">
-  <h1>Minah's First Homepage</h1>
-  <p>hello world <i class="fa-regular fa-face-smile"></i></p> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="ctp" value="${pageContext.request.contextPath}" />
+<div id="header" class="jumbotron text-center" style="margin-bottom:0;background-image:url('${ctp}/homepage_images/15.jpg')">
+	<!-- <img src="homepage_images/15.jpg" alt="img1"> -->
+  <h1 style="color:white">Minah's First Homepage</h1>
+  <p style="color:white">hello world <i class="fa-regular fa-face-smile"></i></p> 
 </div>

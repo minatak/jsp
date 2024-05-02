@@ -6,7 +6,7 @@
     <th>name</th>
     <th>age</th>
     <th>gender</th>
-    <th>address</th>
+    <th>address=${vos}</th>
   </tr>
   <c:forEach var="vo" items="${vos}" varStatus="st">
   	<tr>
@@ -17,6 +17,6 @@
   	  <td>${vo.gender}</td>
   	  <td>${vo.address}</td>
   	</tr>
-  	</c:forEach>
- 	  <tr><td colspan="6" class="m-0 p-0"></td></tr>
+	</c:forEach>
+  <tr><td colspan="6" class="m-0 p-0"></td></tr>
 </table>

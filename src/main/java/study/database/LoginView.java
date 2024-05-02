@@ -1,7 +1,6 @@
-package study.homework;
+package study.database;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,19 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import study.database.LoginDAO;
-import study.database.LoginVO;
-
-@WebServlet("/study/homework/newMemberList")
-public class newMemberList extends HttpServlet {
+@WebServlet("/study/database/LoginView")
+public class LoginView extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int idx = request.getParameter("idx")==null ? 0 : Integer.parseInt(request.getParameter("idx"));
+		
 		LoginDAO dao = new LoginDAO();
 		
-		ArrayList<LoginVO> vos = dao.getnewMemberList();
-		request.setAttribute("vos", vos);
-		//System.out.println("vos: " + vos);
-		String viewPage = "../study/homework/newMemberTable.jsp";
+		LoginVO vo = dao.getLoginIdxSearch(idx);
+		
+		request.setAttribute("vo", vo);
+		
+		String viewPage = "/study/database/view.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
 	}
