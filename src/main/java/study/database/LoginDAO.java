@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import guest.GuestVO;
+
 public class LoginDAO {
 
 	private Connection conn = null;
@@ -88,11 +90,13 @@ public class LoginDAO {
 	}
 
 	// 전체 회원 정보 검색
-	public ArrayList<LoginVO> getLoginList() {
+	public ArrayList<LoginVO> getLoginList(String sortKey, int startIndexNo, int pageSize) {
 		ArrayList<LoginVO> vos = new ArrayList<LoginVO>();
 		try {
-			sql = "select * from hoewon order by idx";
+			sql = "select * from hoewon order by " + sortKey + " limit ?,?";
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startIndexNo);
+			pstmt.setInt(2, pageSize);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -135,64 +139,62 @@ public class LoginDAO {
 		return res;
 	}
 
-	// 신규가입회원 5명 보여주기
-	public ArrayList<LoginVO> getnewMemberList() {
-    ArrayList<LoginVO> vos = new ArrayList<LoginVO>();
-    
-    try {
-        sql = "select * from hoewon order by idx desc limit 5";
-        pstmt = conn.prepareStatement(sql);
-        rs = pstmt.executeQuery();
-        
-        while(rs.next()) {
-            vo = new LoginVO();
-            vo.setIdx(rs.getInt("idx"));
-            vo.setMid(rs.getString("mid"));
-            vo.setPwd(rs.getString("pwd"));
-            vo.setName(rs.getString("name"));
-            vo.setAge(rs.getInt("age"));
-            vo.setGender(rs.getString("gender"));
-            vo.setAddress(rs.getString("address"));
-            vos.add(vo);
-        }
-    } catch (SQLException e) {
-        System.out.println("SQL 오류 : " + e.getMessage());
-    } finally {
-        rsClose();
-    }
-    return vos;
+	// 최근 가입한 5명의 회원 검색하기
+	public ArrayList<LoginVO> getRecentFiveMember() {
+		ArrayList<LoginVO> vos = new ArrayList<LoginVO>();
+		try {
+			sql = "select * from hoewon order by idx desc limit 3";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				vo = new LoginVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setMid(rs.getString("mid"));
+				vo.setPwd(rs.getString("pwd"));
+				vo.setName(rs.getString("name"));
+				vo.setAge(rs.getInt("age"));
+				vo.setGender(rs.getString("gender"));
+				vo.setAddress(rs.getString("address"));	
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			rsClose();
+		}
+		return vos;
 	}
 
-	// 개별 조회 (이름으로 검색시)
+	// 개별 조회
 	public ArrayList<LoginVO> getLoginSearch(String name) {
 		ArrayList<LoginVO> vos = new ArrayList<LoginVO>();
-    
-    try {
-        sql = "select * from hoewon where name like ? order by name";
-        pstmt = conn.prepareStatement(sql);
-        pstmt.setString(1, "%"+name+"%");
-        rs = pstmt.executeQuery();
-        
-        while(rs.next()) {
-            vo = new LoginVO();
-            vo.setIdx(rs.getInt("idx"));
-            vo.setMid(rs.getString("mid"));
-            vo.setPwd(rs.getString("pwd"));
-            vo.setName(rs.getString("name"));
-            vo.setAge(rs.getInt("age"));
-            vo.setGender(rs.getString("gender"));
-            vo.setAddress(rs.getString("address"));
-            vos.add(vo);
-        }
-    } catch (SQLException e) {
-        System.out.println("SQL 오류 : " + e.getMessage());
-    } finally {
-        rsClose();
-    }
-    return vos;
+		try {
+			sql = "select * from hoewon where name like ? order by name";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+name+"%");
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				vo = new LoginVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setMid(rs.getString("mid"));
+				vo.setPwd(rs.getString("pwd"));
+				vo.setName(rs.getString("name"));
+				vo.setAge(rs.getInt("age"));
+				vo.setGender(rs.getString("gender"));
+				vo.setAddress(rs.getString("address"));	
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			rsClose();
+		}
+		return vos;
 	}
 
-	// idx로 검색처리 
+	// idx로 검색처리
 	public LoginVO getLoginIdxSearch(int idx) {
 		LoginVO vo = new LoginVO();
 		try {
@@ -218,19 +220,18 @@ public class LoginDAO {
 		return vo;
 	}
 
-	// 회원정보 수정처리
+	// 회원 정보 수정처리
 	public int setLoginUpdate(LoginVO vo) {
 		int res = 0;
 		try {
-			sql = "update hoewon set mid=?,pwd=?,name=?,age=?,gender=?,address=? where idx=?";
+			sql = "update hoewon set pwd=?,name=?,age=?,gender=?,address=? where idx=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, vo.getMid());
-			pstmt.setString(2, vo.getPwd());
-			pstmt.setString(3, vo.getName());
-			pstmt.setInt(4, vo.getAge());
-			pstmt.setString(5, vo.getGender());
-			pstmt.setString(6, vo.getAddress());
-			pstmt.setInt(7, vo.getIdx());
+			pstmt.setString(1, vo.getPwd());
+			pstmt.setString(2, vo.getName());
+			pstmt.setInt(3, vo.getAge());
+			pstmt.setString(4, vo.getGender());
+			pstmt.setString(5, vo.getAddress());
+			pstmt.setInt(6, vo.getIdx());
 			res = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("SQL 오류 : " + e.getMessage());
@@ -240,7 +241,7 @@ public class LoginDAO {
 		return res;
 	}
 
-	// 회원정보 삭제 처리
+	// 회원정보 삭제처리
 	public void setLoginDelete(String mid) {
 		try {
 			sql = "delete from hoewon where mid = ?";
@@ -254,4 +255,20 @@ public class LoginDAO {
 		}
 	}
 
+	// 전체 회원건수 구하기
+	public int getTotRecCnt() {
+		int totRecCnt = 0;
+		try {
+			sql = "select count(*) as cnt from hoewon";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			totRecCnt = rs.getInt("cnt");
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			rsClose();
+		}
+		return totRecCnt;
+	}
 }

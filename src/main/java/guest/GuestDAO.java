@@ -59,11 +59,13 @@ public class GuestDAO {
 	}
 
 	// 방명록 전체 자료 리스트 처리
-	public ArrayList<GuestVO> getGuestList() {
+	public ArrayList<GuestVO> getGuestList(int startIndexNo, int pageSize) {
 		ArrayList<GuestVO> vos = new ArrayList<GuestVO>();
 		try {
-			sql = "select * from guest order by idx desc";
+			sql = "select * from guest order by idx desc limit ?,?"; // sql 함수 - 이렇게 limit 뒤에 숫자, 숫자 를 쓰면 앞->시작 인덱스, 뒤->끝 인덱스 까지를 가져온다.
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startIndexNo);
+			pstmt.setInt(2, pageSize);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -126,7 +128,7 @@ public class GuestDAO {
 	public ArrayList<GuestVO> getMineSearch(String hostIp) {
 		ArrayList<GuestVO> vos = new ArrayList<GuestVO>();
 		try {
-			sql = "select * from guest where hostIp = ? order by idx";
+			sql = "select * from guest where hostIp = ? order by idx desc";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, hostIp);
 			rs = pstmt.executeQuery();
@@ -150,4 +152,21 @@ public class GuestDAO {
 		}
 		return vos;
 	}
+
+	public int getTotRecCnt() {
+		int totRecCnt = 0;
+		try {
+			sql = "select count(*) as cnt from guest";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			totRecCnt = rs.getInt("cnt");
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			rsClose();
+		}
+		return totRecCnt;
+	}
+	
 }

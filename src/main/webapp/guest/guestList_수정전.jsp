@@ -41,18 +41,7 @@
     		return false;
     	}
     }
-    /* 이따 고치기
-    function mineCheck(switch) {
-    	if(switch==1) {
-    		location.href = '${ctp}/mineSearch?hostIp=${myIP}';
-    		switch = 0;
-    	}
-    	else {
-    		location.href = '${ctp}/GuestList';
-    		switch = 1;
-    	}
-    }
-     */
+
     function guestUpdate(idx) {
     	let ans = alert("해당 기능은 준비중입니다 ( ´͈ ꇴ `͈)੭⁾⁾·°");
     }
@@ -62,9 +51,6 @@
 			location.href = "${ctp}/GuestList?pag=${pag}&pageSize="+pageSize;
 		}
 
-    function warningCheck() {
-    	let ans = alert("개 사진 그만 올려");
-		}
   </script>
 </head>
 <body>
@@ -78,15 +64,8 @@
     <tr>
      <!--  <td><a href="#" class="btn" style="background-color: #a3b18a">관리자</a></td> -->
       <td>
-      <%-- 이따 고치기 !!!!!!
-      	<c:set var="switch" value="1" />
-	      <c:if test="${switch == 1}"><button onclick="mineCheck(${switch})" class="btn" style="background-color: #a5a58d">내 글 확인</button></c:if>
-	      <c:if test="${switch == 0}"><button onclick="mineCheck(${switch})" class="btn" style="background-color: #a5a58d">전체 글 보기</button></c:if>
-	       --%>
-	       
-				<a href="${ctp}/guest/guestInput.jsp" class="btn" style="background-color: #6b705c">글쓰기</a>
-	     <%--  <c:if test="${pageContext.request.remoteAddr != '192.168.50.60'}"><a href="${ctp}/guest/guestInput.jsp" class="btn" style="background-color: #6b705c">글쓰기</a></c:if>
-	      <c:if test="${pageContext.request.remoteAddr == '192.168.50.60'}"><a href="javascript:warningCheck()" class="btn" style="background-color: #6b705c">글쓰기</a></c:if> --%>
+	      <a href="${ctp}/mineSearch?hostIp=${myIP}" class="btn" style="background-color: #a5a58d">내 글 확인</a>
+	      <a href="${ctp}/guest/guestInput.jsp" class="btn" style="background-color: #6b705c">글쓰기</a>
       </td>
       <td class="text-right">
       	<c:if test="${pag > 1}">
@@ -145,9 +124,7 @@
 	    <tr>
 	      <th>홈페이지</th>
 	      <td colspan="3">
-	        <c:if test="${empty vo.homePage || fn:length(vo.homePage)<=10 || fn:indexOf(vo.homePage,'.')==-1}">
-	        	<a href="http://${vo.hostIp}:9090/javaclass/Main">홈페이지</a>
-	        </c:if>
+	        <c:if test="${empty vo.homePage || fn:length(vo.homePage)<=10 || fn:indexOf(vo.homePage,'.')==-1}">- 없음 -</c:if>
 	        <c:if test="${!empty vo.homePage && fn:length(vo.homePage)>10 && fn:indexOf(vo.homePage,'.')!=-1}"><a href='${vo.homePage}' target='_blank'>${vo.homePage}</a></c:if>
 	      </td>
 	    </tr>

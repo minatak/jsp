@@ -16,19 +16,24 @@
   .navbar-nav .nav-link, .navbar-brand{
       color: #333d29;
   }
-  h2, h3, h5, .table {
+  h2, h3, h5 {
 	  font-family: "Playfair Display", serif;
 	  font-optical-sizing: auto;
 	  font-weight: <weight>;
 	  font-style: normal;
   }
-   .welcome {
+   .welcome, .table {
 	  font-family: "Noto Sans KR", sans-serif;
 	  font-optical-sizing: auto;
 	  font-weight: <weight>;
 	  font-style: normal;
+	  float: right;
   }
-  
+ /*  .table {
+    font-family: "Gowun Batang", serif;
+	  font-weight: 400;
+	  font-style: normal;
+  } */
   </style>
 </head>
 <body>
@@ -39,13 +44,13 @@
 <!-- 메뉴바(nav) -->
 <%@ include file = "../../include/nav.jsp" %>
 
-<div class="container" style="margin-top:20px">
+<div class="container" style="margin-top:40px">
   <div class="row">
     <div class="col-sm-4">
-    <%    if(!mid_.equals("")) { %><h5 class="mb-4">${sName}님 환영합니다 :)</h5><%    } %>
+   <%--  <%    if(!mid_.equals("")) { %><h5 class="mb-4 welcome">${sName}님 환영합니다 :)</h5><%    } %> --%>
       <h2>About Me</h2>
       <h5>Photo of me:</h5>
-     	<img src="homepage_images/8.jpg" alt="img1" height="200px">
+     	<img src="homepage_images/8.jpg" alt="img1" width="350px" height="200px">
       <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
       <h3 class="text-left">New members</h3>
       	<table class="table table-striped table-hover text-center">
@@ -62,23 +67,25 @@
 	          </tr>
 	        </c:forEach>
         </table>
-    	<p class="welcome">가입을 환영합니다 :)</p> 
+    	<!-- <p class="welcome">가입을 환영합니다 :)</p>  -->
       <hr class="d-sm-none">
       <!-- <h5>Photo of me:</h5>
      	<img src="homepage_images/3.jpg" alt="img1" width="350px" height="350px">
       <p>Some text about me in culpa qui officia deserunt mollit anim..</p> -->
     </div>
     <div class="col-sm-8">
+     	<%    if(!mid_.equals("")) { %><h6 class="mb-4 welcome">${sName}님 환영합니다 :) </h6><%    } %>
       <h2>TITLE HEADING</h2>
       <h5>Title description, Dec 7, 2017</h5>
-      <div class="fakeimg">Fake Image</div>
+      <!-- <div class="fakeimg">Fake Image</div> -->
+      <img src="homepage_images/16.jpg" alt="img1" height="400px">
       <p>Some text..</p>
       <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
       <br>
       <h2>TITLE HEADING</h2>
       <h5>Title description, Sep 2, 2017</h5>
       <!-- <div class="fakeimg">Fake Image</div> -->
-      <img src="homepage_images/16.jpg" alt="img1" height="400px">
+      <!-- <img src="homepage_images/16.jpg" alt="img1" height="400px"> -->
       <p>Some text..</p>
       <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
     </div>
