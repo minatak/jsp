@@ -146,7 +146,7 @@
 	      <th>홈페이지</th>
 	      <td colspan="3">
 	        <c:if test="${empty vo.homePage || fn:length(vo.homePage)<=10 || fn:indexOf(vo.homePage,'.')==-1}">
-	        	<a href="http://${vo.hostIp}:9090/javaclass/Main">홈페이지</a>
+	        	<a href="http://${vo.hostIp}:9090/javaclass/Main" target="_blank"><i class="fa-solid fa-house"></i></a>
 	        </c:if>
 	        <c:if test="${!empty vo.homePage && fn:length(vo.homePage)>10 && fn:indexOf(vo.homePage,'.')!=-1}"><a href='${vo.homePage}' target='_blank'>${vo.homePage}</a></c:if>
 	      </td>
