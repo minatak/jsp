@@ -30,6 +30,9 @@
     	color: white;
     	border-radius: 5;
     }
+    a:link {
+  		color : #a3b18a;
+		}
   </style>
   <script>
     'use strict';
