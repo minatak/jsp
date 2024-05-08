@@ -7,7 +7,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>search.jsp</title>
+  <title>input.jsp</title>
   <%@ include file = "/include/bs4.jsp" %>
 </head>
 <body>
@@ -15,13 +15,20 @@
 <jsp:include page="/include/nav.jsp" />
 <p><br/></p>
 <div class="container">
-  <h2>회원검색</h2>
+  <h2 style="text-align:center;">회원가입</h2>
   <hr/>
-  <input type="text" value="mid" class="form-control"/>
-  <div>
-  	<a href="searchOk.do5" class="btn btn-warning">검색하기</a>
-  	<a href="test5.do5" class="btn btn-warning">돌아가기</a>
-  </div>
+  <form name="myform" method="post" action="inputOk.do5">
+  	<div>아이디
+  	  <input type="text" name="mid" value="admin" class="form-control mb-3" autofocus required />
+  	</div>
+  	<div>비밀번호
+  	  <input type="password" name="pwd" value="1234" class="form-control mb-3" required />
+  	</div>
+  	<div style="text-align:center;">
+  	  <button type="submit" class="btn btn-success">가입하기</button>
+  		<a href="test5.do5" class="btn btn-warning">돌아가기</a>
+  	</div>
+  </form>
 </div>
 <p><br/></p>
 <jsp:include page="/include/footer.jsp" />

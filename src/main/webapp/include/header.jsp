@@ -3,7 +3,8 @@
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <div id="header" class="jumbotron text-center" style="margin-bottom:0;background-image:url('${ctp}/homepage_images/15.jpg')">
 	<!-- <img src="homepage_images/15.jpg" alt="img1"> -->
-  <h1 style="color:white">여름은 향기를 남기고</h1>
+  <h1 style="color:white">Mina's First Homepage</h1>
+<!--   <h1 style="color:white">여름은 향기를 남기고</h1> -->
   <p style="color:white" class="title">hello world <i class="fa-regular fa-face-smile"></i></p> 
 </div>
 <style>

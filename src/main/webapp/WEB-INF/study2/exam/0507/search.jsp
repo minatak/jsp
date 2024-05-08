@@ -7,7 +7,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>search.jsp</title>
+  <title>Insert</title>
   <%@ include file = "/include/bs4.jsp" %>
 </head>
 <body>
@@ -17,7 +17,9 @@
 <div class="container">
   <h2>회원검색</h2>
   <hr/>
-  <input type="text" value="mid" class="form-control"/>
+  <div>
+	  <input type="text" name="mid" placeholder="검색하실 아이디를 입력해주세요" class="form-control mb-3"/>
+  </div>
   <div>
   	<a href="searchOk.do5" class="btn btn-warning">검색하기</a>
   	<a href="test5.do5" class="btn btn-warning">돌아가기</a>

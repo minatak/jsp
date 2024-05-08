@@ -1,4 +1,4 @@
-package study2.mapping;
+package study2.exam.j0507;
 
 import java.io.IOException;
 
@@ -10,60 +10,59 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
-@WebServlet("*.do4")
-public class Test4Controller extends HttpServlet {
+@WebServlet("*.do5")
+public class Test5Controller extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Test4Interface command = null;
-		String viewPage = "/WEB-INF/study2/mapping/";
+		Test5Interface command = null;
 		
 		String uri = request.getRequestURI();
-		
+
 		String com = uri.substring(uri.lastIndexOf("/")+1, uri.lastIndexOf("."));
 		
-		if(com.equals("test4")) {
-			viewPage += "test4.jsp";
+		String viewPage = "";
+		if(com.contains("Ok")) {
+			viewPage = "/include/message.jsp";
 		}
-		else if(com.equals("list")) {
-			command = new Test4ListCommand();
-			command.execute(request, response);
-			// viewPage = "/WEB-INF/study2/mapping/list.jsp";
-			viewPage += "list.jsp";
+		else viewPage = "/WEB-INF/study2/exam/0507/"; 
+		
+		if(com.equals("test5")) {
+			viewPage += "test5.jsp";
 		}
 		else if(com.equals("input")) {
-			// viewPage = "/WEB-INF/study2/mapping/input.jsp";
-			viewPage += "input.jsp";
+			viewPage += com + ".jsp";
 		}
 		else if(com.equals("inputOk")) {
-			command = new Test4InputOkCommand();
+			command = new Test5InputOkCommand();
 			command.execute(request, response);
 		}
 		else if(com.equals("update")) {
-			command = new Test4UpdateCommand();
-			command.execute(request, response);
-			viewPage += "update.jsp";
+			viewPage += com + ".jsp";
 		}
 		else if(com.equals("updateOk")) {
-			command = new Test4UpdateOkCommand();
+			command = new Test5UpdateOkCommand();
 			command.execute(request, response);
 		}
 		else if(com.equals("delete")) {
-			command = new Test4DeleteCommand();
-			command.execute(request, response);
-			viewPage += "delete.jsp";
+			viewPage += com + ".jsp";
 		}
 		else if(com.equals("deleteOk")) {
-			command = new Test4DeleteOkCommand();
+			command = new Test5DeleteOkCommand();
 			command.execute(request, response);
 		}
 		else if(com.equals("search")) {
-			command = new Test4SearchCommand();
-			command.execute(request, response);
-			viewPage += "search.jsp";
+			viewPage += com + ".jsp";
 		}
-		
-		if(com.contains("Ok")) {
-			viewPage = "/include/message.jsp";
+		else if(com.equals("searchOk")) {
+			command = new Test5SearchOkCommand();
+			command.execute(request, response);
+		}
+		else if(com.equals("list")) {
+			viewPage += com + ".jsp";
+		}
+		else if(com.equals("listOk")) {
+			command = new Test5ListOkCommand();
+			command.execute(request, response);
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

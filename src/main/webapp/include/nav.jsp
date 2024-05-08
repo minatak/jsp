@@ -58,6 +58,11 @@
 			      <a class="dropdown-item" href="${ctp}/mapping/test2.do">확장자 매핑연습</a>
 			      <a class="dropdown-item" href="${ctp}/mapping/test3.do3">확장자 매핑연습3</a>
 			      <a class="dropdown-item" href="${ctp}/mapping/test4.do4">확장자 매핑연습4</a>
+			      <a class="dropdown-item" href="${ctp}/exam/j0507/test5.do5">확장자 매핑연습5_숙제</a>
+			      <a class="dropdown-item" href="${ctp}/ajaxTest1.st">AJAX연습(일반)</a>
+			      <a class="dropdown-item" href="${ctp}/ajaxTest2.st">AJAX연습(응용)</a>
+			      <a class="dropdown-item" href="${ctp}/ajaxTest3.st">AJAX연습(회원관리)</a>
+			      <a class="dropdown-item" href="${ctp}/passCheck.ex">AJAX연습(비밀번호암호화)_숙제</a>
 			    </div>
 			  </div>
       </li>
