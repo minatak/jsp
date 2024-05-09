@@ -23,7 +23,7 @@ public class LoginOk extends HttpServlet {
 		
 		// LoginVO vo = new LoginVO();
 		LoginVO vo = dao.getLoginIdCheck(mid, pwd);
-		System.out.println("vo : " + vo);
+		// System.out.println("vo : " + vo);
 		
 		PrintWriter out = response.getWriter();
 		

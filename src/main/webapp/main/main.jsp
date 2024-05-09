@@ -74,7 +74,7 @@
       <p>Some text about me in culpa qui officia deserunt mollit anim..</p> -->
     </div>
     <div class="col-sm-8">
-     	<%    if(!mid_.equals("")) { %><h6 class="mb-4 welcome">${sName}님 환영합니다 :) </h6><%    } %>
+     	<c:if test="${level <= 4}"><h6 class="mb-4 welcome">${sNickName}님 환영합니다 :) </h6></c:if>
       <h2>TITLE HEADING</h2>
       <h5>Title description, Dec 7, 2017</h5>
       <!-- <div class="fakeimg">Fake Image</div> -->
