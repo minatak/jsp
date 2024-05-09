@@ -89,6 +89,35 @@
     		});
     	}
     }
+    
+    // 닉네임 중복체크
+    function nickCheck() {
+    	let nickName = myform.nickName.value;
+    	
+    	if(nickName.trim() == "") {
+    		alert("아이디를 입력하세요!");
+    		myform.nickName.focus();
+    	}
+    	else {
+    		idCheckSw = 1;
+    		
+    		$.ajax({
+    			url  : "${ctp}/MemberNickCheck.mem",
+    			type : "get",
+    			data : {nickName : nickName},
+    			success:function(res) {
+    				if(res != '0') {
+    					alert("이미 사용중인 닉네임입니다. 다시 입력하세요.");
+    					myform.nickName.focus();
+    				}
+    				else alert("사용 가능한 닉네임입니다.");
+    			},
+    			error : function() {
+    				alert("전송 오류!");
+    			}
+    		});
+    	}
+    }
   </script>
 </head>
 <body>

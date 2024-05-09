@@ -38,7 +38,7 @@ public class MemberDAO {
 		}
 	}
 
-	// 로그인시 아이디 체크하기.
+	// 로그인시 아이디 체크하기
 	public MemberVO getMemberIdCheck(String mid) {
 		MemberVO vo = new MemberVO();
 		try {
@@ -149,6 +149,26 @@ public class MemberDAO {
 		} finally {
 			pstmtClose();
 		}
+	}
+
+	// 중복 닉네임 체크하기
+	public MemberVO getMemberNickCheck(String nickName) {
+		MemberVO vo = new MemberVO();
+		try {
+			sql = "select nickName from member where nickName = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, nickName);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo.setNickName(rs.getString("nickName"));
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			rsClose();
+		}
+		return vo;
 	}
 	
 	
