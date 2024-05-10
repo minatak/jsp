@@ -82,6 +82,7 @@
     					myform.mid.focus();
     				}
     				else alert("사용 가능한 아이디 입니다.");
+    				myform.pwd.focus();
     			},
     			error : function() {
     				alert("전송 오류!");
@@ -95,7 +96,7 @@
     	let nickName = myform.nickName.value;
     	
     	if(nickName.trim() == "") {
-    		alert("아이디를 입력하세요!");
+    		alert("닉네임을 입력하세요");
     		myform.nickName.focus();
     	}
     	else {
@@ -111,6 +112,7 @@
     					myform.nickName.focus();
     				}
     				else alert("사용 가능한 닉네임입니다.");
+    				myform.name.focus();
     			},
     			error : function() {
     				alert("전송 오류!");
