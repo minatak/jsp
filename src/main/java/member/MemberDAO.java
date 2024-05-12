@@ -198,11 +198,12 @@ public class MemberDAO {
 	// 로그인시에 처리할 내용들을 업데이트 시켜준다.
 	public void setLoginUpdate(MemberVO vo) {
 		try {
-			sql = "update member set point=?, lastDate=now(), visitCnt=visitCnt+1, todayCnt=? where mid = ?";
+			sql = "update member set point=?, lastDate=now(), visitCnt=visitCnt+1, todayCnt=?, level=? where mid = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, vo.getPoint());
 			pstmt.setInt(2, vo.getTodayCnt());
 			pstmt.setString(3, vo.getMid());
+			pstmt.setInt(4, vo.getLevel());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("SQL 오류 : " + e.getMessage());

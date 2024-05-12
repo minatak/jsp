@@ -2,6 +2,9 @@ package member;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -10,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import common.SecurityUtil;
+import guest.GuestDAO;
+import guest.GuestVO;
 
 public class MemberLoginOkCommand implements MemberInterface {
 
@@ -75,16 +80,21 @@ public class MemberLoginOkCommand implements MemberInterface {
 			
 			// 숙제 - 자동 정회원 등업시키기
 			// 조건 : 방명록에 5회 이상 글을 올렸을 시 '준회원'에서 '정회원'으로 자동 등업처리한다. (단, 방명록의 글은 하루에 여러번 등록해도 1회로 처리한다.
+			GuestDAO gDao = new GuestDAO();
+			ArrayList<GuestVO> gVos = gDao.getMemberGuestSearch(mid, vo.getName(), vo.getNickName());
+
+			Set<String> guestTime = new HashSet<>(); // 중복된 날짜를 제거하기 위해 HashSet 사용
+			for(GuestVO gVo : gVos) {
+				guestTime.add(gVo.getVisitDate().substring(0, 10)); 
+			}
 			
+			int guestCnt = guestTime.size(); 
 			
-			
-			
-			// dao.setCnts(vo);
+			if(guestCnt >= 5) { 
+				vo.setLevel(2);
+			}
 			dao.setLoginUpdate(vo);
 		}
-		
-
-		
 		
 		
 		// 쿠키에 아이디를 저장/해제 처리한다.
