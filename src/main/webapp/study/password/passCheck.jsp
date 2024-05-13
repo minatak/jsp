@@ -27,7 +27,6 @@
     	else {
   			myform.idx.value = idx;
     		myform.action = "${ctp}/study/password/PassCheck";
-  			myform.submit();
     	}
     }
     

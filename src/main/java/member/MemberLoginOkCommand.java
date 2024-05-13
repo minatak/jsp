@@ -1,8 +1,10 @@
 package member;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -51,50 +53,40 @@ public class MemberLoginOkCommand implements MemberInterface {
 		// 로그인 체크 완료후에 처리할 내용 (쿠키/세션 등)
 		
 		// 회원일때 처리할 부분
-		 
-		// 회원이 맞으면 vo.getMid 값이 null이 아니다.
-		if(vo.getMid() != null) {
-			
-			// 방문일 비교처리
-			String strLastDate = vo.getLastDate().substring(0, 10); // 마지막 접속일
-			LocalDate now = LocalDate.now(); // 현재 접속 날짜
-			String strNow = now.toString(); // 문자 형식으로 변환
-			
-			int visitCnt = vo.getVisitCnt(); // 누적된 방문횟수 가져옴
-			int todayCnt = vo.getTodayCnt(); // 누적된 방문횟수 가져옴
-			int pointCnt = vo.getPoint(); // 누적된 포인트 가져옴
-			
-			if(strLastDate.equals(strNow)) { // 오늘 한 번 이상 접속한 적이 있는 경우
-				vo.setTodayCnt(todayCnt + 1);
-				// 방문포인트지급 - 매번 10포인트씩 지급, 단 1일 최대 50포인트까지만 지급
-				if(todayCnt < 5 ) {
-					vo.setPoint(pointCnt+10);
-				}
-			}
-			else { // 새로 접속한 경우 (오늘 처음 방문한 경우)
-				vo.setTodayCnt(1);
-				vo.setPoint(pointCnt+10);
-			}
-			vo.setVisitCnt(visitCnt+1);
-			vo.setLastDate(strNow);
-			
-			// 숙제 - 자동 정회원 등업시키기
-			// 조건 : 방명록에 5회 이상 글을 올렸을 시 '준회원'에서 '정회원'으로 자동 등업처리한다. (단, 방명록의 글은 하루에 여러번 등록해도 1회로 처리한다.
-			GuestDAO gDao = new GuestDAO();
-			ArrayList<GuestVO> gVos = gDao.getMemberGuestSearch(mid, vo.getName(), vo.getNickName());
-
-			Set<String> guestTime = new HashSet<>(); // 중복된 날짜를 제거하기 위해 HashSet 사용
-			for(GuestVO gVo : gVos) {
-				guestTime.add(gVo.getVisitDate().substring(0, 10)); 
-			}
-			
-			int guestCnt = guestTime.size(); 
-			
-			if(guestCnt >= 5) { 
-				vo.setLevel(2);
-			}
-			dao.setLoginUpdate(vo);
+		// (1번/2-1번)처리 : 방문포인트 처리를 위한 날짜 추출 비교하기 - 조건에 맞도록 방문 포인트와 카운트를 증가처리한다.
+		Date today = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String strToday = sdf.format(today);
+		
+		if(!strToday.equals(vo.getLastDate().substring(0,10))) {
+			// 오늘 처음 방문한 경우이다.(오늘 방문카운트는 1로, 기존 포인트에 +10)
+			vo.setTodayCnt(1);
+			vo.setPoint((vo.getPoint() + 10));
 		}
+		else {
+			// 오늘 다시 방문한경우(오늘 방문카운트는 오늘방문카운트 + 1, 포인트증가는? 오늘 방문횟수가 5회전까지라면 기존포인트에 +10을 한다.)
+			vo.setTodayCnt(vo.getTodayCnt() + 1);
+			if(vo.getTodayCnt() <= 5) vo.setPoint(vo.getPoint() + 10);
+		}		
+		
+		// 2-2. 자동 정회원 등업시키기
+		// 조건: 방명록에 5회이상 글을 올렸을시 '준회원'에서 '정회원'으로 자동 등업처리한다.(단, 방명록의 글은 1일 여러번 등록해도 1회로 처리한다) 
+		GuestDAO gDao = new GuestDAO();
+		ArrayList<GuestVO> gVos = gDao.getMemberGuestSearch(mid, vo.getName(), vo.getNickName());
+
+		Set<String> guestTime = new HashSet<>(); // 중복된 날짜를 제거하기 위해 HashSet 사용
+		for(GuestVO gVo : gVos) {
+			guestTime.add(gVo.getVisitDate().substring(0, 10)); 
+		}
+		
+		int guestCnt = guestTime.size(); 
+		
+		if(guestCnt >= 5) { 
+			vo.setLevel(2);
+		}
+		
+		// 3. 방문포인트와 카운트를 증가처리한내용을 vo에 모두 담았다면 DB 자신의 레코드에 변경된 사항들을 갱신처리해준다.
+		dao.setLoginUpdate(vo);		
 		
 		
 		// 쿠키에 아이디를 저장/해제 처리한다.
