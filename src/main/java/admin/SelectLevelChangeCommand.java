@@ -10,13 +10,13 @@ public class SelectLevelChangeCommand implements AdminInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int levelIdx = request.getParameter("levelIdx")==null ? 999 : Integer.parseInt(request.getParameter("levelIdx"));
+		int level = request.getParameter("level")==null ? 999 : Integer.parseInt(request.getParameter("level"));
+		String checkedItems = request.getParameter("checkedItems")==null ? "" : request.getParameter("checkedItems");
+		checkedItems = checkedItems.substring(0, checkedItems.length() - 1);
 		
 		AdminDAO dao = new AdminDAO();
-		
-		int res = dao.setMemberLevelChange(idx, level);
+		int res = dao.setSelectMemberLevelChange(checkedItems, level);
 
-이거수정해야됨!!!!!!!!!!!!!!
 		response.getWriter().write(res + "");
 	}
 

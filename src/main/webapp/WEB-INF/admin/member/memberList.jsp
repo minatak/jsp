@@ -68,32 +68,43 @@
     	});
     }
     
+    
     // 선택 회원별 각각의 등급 변경처리(ajax처리) / 전체선택 -> 전체변경 되게 !
     function selectLevelChange(e) {
+    	
+    	let level = document.getElementById("selectLevel").value;
+    	let checkedItems = "";
+    	
+			for(let i=0; i<=${vos.size()}; i++) {
+				if(document.getElementById("select"+i).checked) {
+					checkedItems += document.getElementById("select"+i).value + "/";
+				}
+			}
+    	
+    	if(checkedItems == "") {
+    		alert("회원을 선택해주세요.");
+    		return false;
+    	}
+    	
     	let ans = confirm("선택한 회원의 등급을 변경하시겠습니까?");
     	if(!ans) {
     		location.reload();
     		return false;
     	}
     	
-    	var chkArray = []; // 배열 선언
-    	$('input[name=levelCheck]:checked').each(function() { // 체크된 체크박스의 value 값을 가져옴
-    	    chkArray.push(this.value);
-    	});
-
-    	// 배열을 출력하여 확인
-    	console.log(chkArray);
-    	
     	$.ajax({
     		url  : "SelectLevelChange.ad",
     		type : "get",
-    		data : {"levelIdx" : chkArray},
+    		data : {
+    			level : level,
+    			checkedItems : checkedItems
+    		},
     		success:function(res) {
     			if(res != "0") {
     				alert("등급 수정 완료!");
     				location.reload();
     			}
-    			else alert("등급 수정 실패~~");
+    			else alert("등급 수정 실패");
     		},
     		error : function() {
     			alert("전송오류!");
@@ -170,7 +181,8 @@
 	        <c:if test="${vo.userDel != 'OK'}"><c:set var="active" value="활동중"/></c:if>
 		      <tr>
 		      	<td>
-			      	<input type="checkbox" name="levelCheck" id="levelCheck/${vo.idx}" value="levelCheck/${vo.idx}" />
+			      	<c:if test="${vo.level != 0}"><input type="checkbox" name="levelCheck" id="select${vo.idx}" value="${vo.idx}" /></c:if>
+			      	<c:if test="${vo.level == 0}"><input type="checkbox" disabled></c:if>
 			        ${vo.idx}
 		        </td>
 		        <td><a href="MemberSearch.mem?mid=${vo.mid}">${vo.mid}</a></td>
@@ -191,6 +203,7 @@
 		        	<c:if test="${vo.level != 0}">
 		          <form name="levelForm">
 		          	<select name="level" onchange="levelChange(this)">
+		          	  <option value="1/${vo.idx}" ${vo.level == 999   ? "selected" : ""}>전체회원</option>
 		          	  <option value="1/${vo.idx}" ${vo.level == 1   ? "selected" : ""}>준회원</option>
 		          	  <option value="2/${vo.idx}" ${vo.level == 2   ? "selected" : ""}>정회원</option>
 		          	  <option value="3/${vo.idx}" ${vo.level == 3   ? "selected" : ""}>우수회원</option>
@@ -209,7 +222,8 @@
   <div>
   	<form name="levelForm"> 
   		선택 회원의 등급을 
-	  	<select name="selectLevel" onchange="selectLevelChange(this)">
+	  	<select name="selectLevel" id="selectLevel" onchange="selectLevelChange(this)">
+	  	  <option value="1/${vo.idx}" ${vo.level == -1   ? "selected" : ""}>등급선택</option>
 	  	  <option value="1/${vo.idx}" ${vo.level == 1   ? "selected" : ""}>준회원</option>
 	  	  <option value="2/${vo.idx}" ${vo.level == 2   ? "selected" : ""}>정회원</option>
 	  	  <option value="3/${vo.idx}" ${vo.level == 3   ? "selected" : ""}>우수회원</option>

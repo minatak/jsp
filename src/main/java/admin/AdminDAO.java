@@ -150,6 +150,35 @@ public class AdminDAO {
 		}
 		return mCount;
 	}
+
+	// 선택한 회원 전체 등급 변경하기
+	public int setSelectMemberLevelChange(String checkedItems, int level) {
+		int res = 0;
+		try {
+			String[] checkedItemsArr = checkedItems.split("/");
+			for(int i = 0; i < checkedItemsArr.length; i++) {				
+				if(level == 99) {
+					sql = "update member set level = ?, userDel = 'OK', lastDate = now() where idx = ?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, level);
+					pstmt.setInt(2, Integer.parseInt(checkedItemsArr[i]));
+					res = pstmt.executeUpdate();
+				}
+				else {				
+					sql = "update member set level = ?, userDel = 'NO' where idx = ?";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, level);
+					pstmt.setInt(2, Integer.parseInt(checkedItemsArr[i]));
+					res = pstmt.executeUpdate();
+				}
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage()); 
+		} finally {
+			pstmtClose();
+		}
+		return res;
+	}
 	
 }
 
