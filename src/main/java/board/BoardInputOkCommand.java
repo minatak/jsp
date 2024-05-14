@@ -21,6 +21,7 @@ public class BoardInputOkCommand implements BoardInterface {
 		
 		vo.setMid(mid);
 		vo.setNickName(nickName);
+		title = title.replace("<", "&lt;").replace(">", "&gt;");
 		vo.setTitle(title);
 		vo.setContent(content);
 		vo.setHostIp(hostIp);
@@ -35,8 +36,8 @@ public class BoardInputOkCommand implements BoardInterface {
 			request.setAttribute("url", "BoardList.bo");
 		}
 		else {
-			request.setAttribute("message", "게시글 등록에 실패했습니다 ㅠㅅㅠ");
-			request.setAttribute("url", "BoardInputOk.bo");
+			request.setAttribute("message", "게시글 등록실패~");
+			request.setAttribute("url", "BoardInput.bo");
 		}
 	}
 

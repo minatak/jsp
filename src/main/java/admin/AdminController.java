@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import admin.member.MemberDeleteOkCommand;
 import admin.member.MemberLevelChangeCommand;
+import admin.member.MemberLevelSelectCheckCommand;
 import admin.member.MemberListCommand;
 
 @SuppressWarnings("serial")
@@ -55,13 +56,13 @@ public class AdminController extends HttpServlet {
 			command.execute(request, response);
 			return;
 		}
-		else if(com.equals("/SelectLevelChange")) {
-			command = new SelectLevelChangeCommand();
+		else if(com.equals("/MemberDeleteOk")) {
+			command = new MemberDeleteOkCommand();
 			command.execute(request, response);
 			return;
 		}
-		else if(com.equals("/MemberDeleteOk")) {
-			command = new MemberDeleteOkCommand();
+		else if(com.equals("/MemberLevelSelectCheck")) {
+			command = new MemberLevelSelectCheckCommand();
 			command.execute(request, response);
 			return;
 		}

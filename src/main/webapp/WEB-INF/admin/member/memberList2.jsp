@@ -113,7 +113,7 @@
 	      <th>성명</th>
 	      <th>생일</th>
 	      <th>성별</th>
-	      <th>최종방문일</th>
+	      <th>최종방문일</th> 
 	      <th>오늘방문횟수</th>
 	      <th>활동여부</th>
 	      <th>현재레벨</th>
@@ -123,7 +123,11 @@
 	        <c:if test="${vo.userDel == 'OK'}"><c:set var="active" value="탈퇴신청"/></c:if>
 	        <c:if test="${vo.userDel != 'OK'}"><c:set var="active" value="활동중"/></c:if>
 		      <tr>
-		        <td>${vo.idx}</td>
+		        <td>
+		        	<c:if test="${vo.level != 0}"><input type="checkbox" name="levelCheck" id="${st.index}" value="${vo.idx}" /></c:if>
+			      	<c:if test="${vo.level == 0}"><input type="checkbox" disabled></c:if>
+			        ${vo.idx}
+		        </td>
 		        <td><a href="MemberSearch.mem?mid=${vo.mid}">${vo.mid}</a></td>
 		        <td>${vo.nickName}</td>
 		        <td>${vo.name}</td>
