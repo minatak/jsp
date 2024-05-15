@@ -46,7 +46,7 @@
     			level : items[0],
     			idx   : items[1]
     	}
-    	
+    	 
     	$.ajax({
     		url  : "MemberLevelChange.ad",
     		type : "get",
@@ -163,8 +163,7 @@
 	  <h3 class="text-center">전체 회원 리스트</h3>
 	  <div class="row">
 	    <div class="col input-group">
-	      <input type="button" value="전체선택" onclick="allCheck()" class="btn btn-success btn-sm mr-1"/>
-	      <input type="button" value="전체취소" onclick="allReset()" class="btn btn-primary btn-sm mr-1"/>
+	      <label><input type="checkbox" id="userInfor" onclick="allCheck()"/>전체선택</label>
 	      <input type="button" value="선택반전" onclick="reverseCheck()" class="btn btn-info btn-sm mr-1"/>
 		    <div class="input-group-append">
 		      <select name="levelSelect" id="levelSelect">
