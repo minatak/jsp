@@ -62,7 +62,8 @@
 				      <a class="dropdown-item" href="${ctp}/passCheck.ex">AJAX연습(비밀번호암호화)</a>
 				      <a class="dropdown-item" href="${ctp}/uuidForm.st">AJAX연습(UUID 연습)</a>
 				      <a class="dropdown-item" href="${ctp}/study/database/login.jsp">로그인 연습</a>
-				      <a class="dropdown-item" href="${ctp}/colorSave.jsp">색상확인</a>
+				      <a class="dropdown-item" href="${ctp}/Modal1.st">모달 연습 1</a>
+				      <a class="dropdown-item" href="${ctp}/Modal2.st">모달 연습 2</a>
 				    </div>
 				  </div>
 		    </li>
@@ -72,6 +73,7 @@
 				  <div class="dropdown">
 				    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">MyPage</button>
 				    <div class="dropdown-menu">
+				    	<a class="dropdown-item" href="${ctp}/colorSave.jsp">색상확인</a>
 				      <a class="dropdown-item" href="MemberMain.mem">회원메인방</a>
 				      <c:if test="${level <= 4 && (level > 1 || level == 0)}">
 					      <a class="dropdown-item" href="#">일정관리</a>
