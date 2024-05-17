@@ -93,6 +93,11 @@ public class BoardController extends HttpServlet {
 			command.execute(request, response);
 			return;
 		}
+		else if(com.equals("/BoardReplyEdit")) {
+			command = new BoardReplyEditCommand();
+			command.execute(request, response);
+			return;
+		}
 		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

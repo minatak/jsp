@@ -324,7 +324,7 @@ public class BoardDAO {
 			sql = "select * from boardReply where boardIdx = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
-			rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery(); 
 			
 			BoardReplyVO vo = null;
 			while(rs.next()) {
@@ -336,7 +336,7 @@ public class BoardDAO {
 				vo.setwDate(rs.getString("wDate"));
 				vo.setHostIp(rs.getString("hostIp"));
 				vo.setContent(rs.getString("content"));
-				
+				vo.setwDate(rs.getString("contentEdit"));
 				replyVos.add(vo);
 			}
 		} catch (SQLException e) {
@@ -351,7 +351,7 @@ public class BoardDAO {
 	public int setReplyInput(BoardReplyVO vo) {
 		int res = 0;
 		try {
-			sql = "insert into boardReply values (default,?,?,?,default,?,?)";
+			sql = "insert into boardReply values (default,?,?,?,default,?,?,default)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, vo.getBoardIdx());
 			pstmt.setString(2, vo.getMid());
@@ -382,5 +382,53 @@ public class BoardDAO {
 		}
 		return res;
 	}
+
+	// 댓글 내용보기 
+	public BoardReplyVO getBoardReplyContent(int idx) {
+		BoardReplyVO vo = new BoardReplyVO();
+		try {
+			sql = "select * from boardReply where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo.setIdx(rs.getInt("idx"));
+				vo.setIdx(rs.getInt("boardIdx"));
+				vo.setMid(rs.getString("mid"));
+				vo.setNickName(rs.getString("nickName"));
+				vo.setContent(rs.getString("content"));
+				vo.setwDate(rs.getString("wDate"));
+				vo.setwDate(rs.getString("hostIp"));
+				vo.setwDate(rs.getString("content"));
+				vo.setwDate(rs.getString("contentEdit"));
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			rsClose();			
+		}
+		return vo;
+	}
+
+//	// 댓글 수정처리 
+//	public BoardReplyVO setBoardReplyEdit(BoardReplyVO vo) {
+//		int res = 0;
+//		try {
+//			sql = "update board set title=?, content=?, openSw=?, hostIp=?, wDate=now() where idx = ?";
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setString(1, vo.getTitle());
+//			pstmt.setString(2, vo.getContent());
+//			pstmt.setString(3, vo.getOpenSw());
+//			pstmt.setString(4, vo.getHostIp());
+//			pstmt.setInt(5, vo.getIdx());
+//			res = pstmt.executeUpdate();
+//		} catch (SQLException e) {
+//			System.out.println("SQL 오류 : " + e.getMessage());
+//		} finally {
+//			pstmtClose();			
+//		}
+//		return res;
+//	}
 
 }

@@ -32,7 +32,7 @@ public class BoardUpdateOkCommand implements BoardInterface {
 		int res = dao.setBoardUpdateOk(vo);
 		
 		if(res != 0) request.setAttribute("message", "게시글이 수정되었습니다.");
-		else request.setAttribute("message", "게시글이 수정실패~~~");
+		else request.setAttribute("message", "게시글 수정 실패");
 		
 		request.setAttribute("url", "BoardContent.bo?idx="+idx+"&pag="+pag+"&pageSize="+pageSize);
 	}

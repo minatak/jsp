@@ -189,6 +189,35 @@
     		}
     	});
     }
+    
+    // 댓글 수정하기
+    function replyEdit(idx) {
+    	let ans = confirm("선택한 댓글을 수정하시겠습니까?");
+    	if(!ans) return false;
+    	
+    	$.ajax({
+    		url  : "BoardReplyEdit.bo",
+    		type : "post",
+    		data : {idx : idx},
+    		success: function(response) {
+		      // 서버 응답이 JSON 형식이라고 가정합니다.
+		      let vo = JSON.parse(response);
+		      
+		      if (vo != null) {
+		        // 응답에서 content 값을 추출하여 textarea에 설정합니다.
+		        $('#modal-content').val(vo.content);
+		        
+		        // 모달 창을 표시합니다.
+		        $('#myModal2').modal('show');
+		      } else {
+		        alert("수정 실패");
+		      }
+		    },
+    		error : function() {
+    			alert("전송 오류!");
+    		}
+    	});
+    }
   </script>
 </head>
 <body>
@@ -273,6 +302,7 @@
 	    <th>댓글내용</th>
 	    <th>댓글일자</th>
 	    <th>접속IP</th>
+	    <th>     </th>
 	  </tr>
 	  <c:forEach var="replyVo" items="${replyVos}" varStatus="st">
 	    <tr>
@@ -284,6 +314,11 @@
 	      <td class="text-left">${fn:replace(replyVo.content, newLine, "<br/>")}</td>
 	      <td>${fn:substring(replyVo.wDate, 0, 10)}</td>
 	      <td>${replyVo.hostIp}</td>
+	      <td>
+	      	<a href="javascript:replyDelete(${replyVo.idx})" title="댓글삭제" class="btn btn-danger btn-sm">삭제</a>
+	      	<a href="javascript:replyEdit(${replyVo.idx})" title="댓글수정" class="btn btn-success btn-sm">수정</a>
+	      	
+	      </td>
 	    </tr>
 	  </c:forEach>
 	  <tr><td colspan="4" class='m-0 p-0'></td></tr>
@@ -336,6 +371,34 @@
             <hr/>
             <input type="button" value="확인" onclick="complaintCheck()" class="btn btn-success form-control" />
           </form>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+	<!-- 댓글 수정 폼 모달창 -->
+  <div class="modal fade" id="myModal2">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content align="center"">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">댓글 수정창</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form name="modalForm BoardReplyEdit" method="post" action="BoardReplyEditOk.bo">
+         		<textarea rows="4" name="modalContent" id="modalContent" class="form-control"></textarea>
+	          <input type="submit" value="수정하기" class="btn btn-success mr-2"/>
+					</form> 
         </div>
         
         <!-- Modal footer -->
