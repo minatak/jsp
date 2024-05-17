@@ -15,7 +15,7 @@ create table member (
   job			  varchar(20),								/* 직업 */
   hobby		  varchar(100),								/* 취미(2개이상 선택가능, 구분자는 '/'로 처리한다. */  
   photo		  varchar(100) default 'noimage.jpg', /* 회원 사진 */
-  content   text,												/* 회원 소개 */
+  content   text,												/* 회원 소개 */ 
   userInfor char(3) default '공개',			  /* 회원 정보 공개여부(공개/비공개) */
   userDel   char(2)  default 'NO',			/* 회원 탈퇴신청여부(NO:현재 활동중, OK:탈퇴신청중) */
   point		  int default 100,						/* 회원 누적포인트(가입포인트100점, 1회방문시 10포인트증가, 1일 최대 50포인트까지 허용, 물건구매시 100원당 1포인트 증가 */

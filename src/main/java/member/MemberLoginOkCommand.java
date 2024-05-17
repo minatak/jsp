@@ -118,7 +118,7 @@ public class MemberLoginOkCommand implements MemberInterface {
 		session.setAttribute("sLevel", vo.getLevel());
 		session.setAttribute("strLevel", strLevel);
 
-		request.setAttribute("message", mid+"님 로그인 되셨습니다.");
+		request.setAttribute("message", vo.getNickName()+"님 로그인 되셨습니다.");
 		request.setAttribute("url", request.getContextPath()+"/MemberMain.mem");
 	}
 

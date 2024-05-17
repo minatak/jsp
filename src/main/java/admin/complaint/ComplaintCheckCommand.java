@@ -13,12 +13,13 @@ public class ComplaintCheckCommand implements AdminInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String part = request.getParameter("part")==null ? "" : request.getParameter("part");
-		int partIdx = request.getParameter("partIdx")==null ? 0 : Integer.parseInt("partIdx");
-		String complaint = request.getParameter("complaint")==null ? "" : request.getParameter("complaint");
+		String part = request.getParameter("part")==null? "" : request.getParameter("part");
+		int partIdx = request.getParameter("partIdx")==null? 0 : Integer.parseInt(request.getParameter("partIdx"));
+		String complaint = request.getParameter("complaint")==null? "" : request.getParameter("complaint");
 		
 		AdminDAO dao = new AdminDAO();
 		
 		dao.setComplaintCheck(part, partIdx, complaint);
 	}
+
 }

@@ -15,7 +15,7 @@ public class UuidProcess extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UUID uid = UUID.randomUUID();
-	
+		
 		response.getWriter().write(uid.toString());
 	}
 }

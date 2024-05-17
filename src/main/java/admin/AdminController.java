@@ -94,7 +94,7 @@ public class AdminController extends HttpServlet {
 		else if(com.equals("/ComplaintCheck")) {
 			command = new ComplaintCheckCommand();
 			command.execute(request, response);
-			viewPage += "/complaint/complaintList.jsp";
+			return;
 		}
 		
 		

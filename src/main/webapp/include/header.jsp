@@ -20,3 +20,11 @@
 	  font-style: normal;
 	}
 </style>
+<script>
+	$(function() {
+		$("#header").on("click",function(){
+			// location.href = "http://192.168.50.59:9090/javaclass/Main"; // 학원에서만 되는 주소 
+			location.href = "${ctp}/Main"; //집에서 할 때 
+		});
+	});
+</script>
