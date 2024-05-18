@@ -411,24 +411,27 @@ public class BoardDAO {
 		return vo;
 	}
 
-//	// 댓글 수정처리 
-//	public BoardReplyVO setBoardReplyEdit(BoardReplyVO vo) {
-//		int res = 0;
-//		try {
-//			sql = "update board set title=?, content=?, openSw=?, hostIp=?, wDate=now() where idx = ?";
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1, vo.getTitle());
-//			pstmt.setString(2, vo.getContent());
-//			pstmt.setString(3, vo.getOpenSw());
-//			pstmt.setString(4, vo.getHostIp());
-//			pstmt.setInt(5, vo.getIdx());
-//			res = pstmt.executeUpdate();
-//		} catch (SQLException e) {
-//			System.out.println("SQL 오류 : " + e.getMessage());
-//		} finally {
-//			pstmtClose();			
-//		}
-//		return res;
-//	}
+	public int setBoardReplyEdit(BoardVO vo2) {
+		
+		
+		return 0;
+	}
+
+	// 댓글 수정처리 
+	public int setBoardReplyEdit(BoardReplyVO vo) {
+		int res = 0;
+		try {
+			sql = "update boardreply set content=?, wDate=now() where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getContent());
+			pstmt.setInt(2, vo.getIdx());
+			res = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL 오류 : " + e.getMessage());
+		} finally {
+			pstmtClose();			
+		}
+		return res;
+	}
 
 }

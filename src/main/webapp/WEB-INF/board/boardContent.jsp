@@ -190,6 +190,7 @@
     	});
     }
     
+    /* 
     // 댓글 수정하기
     function replyEdit(idx) {
     	let ans = confirm("선택한 댓글을 수정하시겠습니까?");
@@ -214,10 +215,22 @@
 		      }
 		    },
     		error : function() {
+    			
     			alert("전송 오류!");
     		}
     	});
     }
+     */
+    
+ 		// 댓글 수정하기
+		function replyEdit(modalIdx, content, boardIdx, pag, pagSize) {
+  		$("#myModal2 #modalIdx").val(modalIdx);
+  		$("#myModal2 #modalContent").val(content);
+  		$("#myModal2 #boardIdx").val(boardIdx);
+  		$("#myModal2 #pag").val(pag);
+  		$("#myModal2 #pagSize").val(pagSize);
+  	}
+    
   </script>
 </head>
 <body>
@@ -302,27 +315,23 @@
 	    <th>댓글내용</th>
 	    <th>댓글일자</th>
 	    <th>접속IP</th>
-	    <th>     </th>
 	  </tr>
 	  <c:forEach var="replyVo" items="${replyVos}" varStatus="st">
 	    <tr>
-	      <td>${replyVo.nickName}
+	      <td>
 	        <c:if test="${sMid == replyVo.mid || sLevel == 0}">
-	          (<a href="javascript:replyDelete(${replyVo.idx})" title="댓글삭제">x</a>)
+	          <a href="javascript:replyDelete(${replyVo.idx})" title="댓글삭제"><i class="fa-solid fa-xmark"></i></a>
+	       		<c:if test="${sNickName == replyVo.nickName}"><a href="#" onclick="replyEdit('${replyVo.idx}','${fn:replace(replyVo.content, newLine, '<br/>')}','${vo.idx}','${pag}','${pageSize}')" data-toggle="modal" data-target="#myModal2"><i class="fa-solid fa-pen-to-square"></i></a></c:if>
 	        </c:if>
+	        ${replyVo.nickName}
 	      </td>
 	      <td class="text-left">${fn:replace(replyVo.content, newLine, "<br/>")}</td>
 	      <td>${fn:substring(replyVo.wDate, 0, 10)}</td>
 	      <td>${replyVo.hostIp}</td>
-	      <td>
-	      	<a href="javascript:replyDelete(${replyVo.idx})" title="댓글삭제" class="btn btn-danger btn-sm">삭제</a>
-	      	<a href="javascript:replyEdit(${replyVo.idx})" title="댓글수정" class="btn btn-success btn-sm">수정</a>
-	      	
-	      </td>
 	    </tr>
 	  </c:forEach>
 	  <tr><td colspan="4" class='m-0 p-0'></td></tr>
-	</table>
+	</table> 
 	
 	<!-- 댓글 입력창 -->
 	<form name="replyForm">
@@ -385,7 +394,7 @@
 	<!-- 댓글 수정 폼 모달창 -->
   <div class="modal fade" id="myModal2">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content align="center"">
+      <div class="modal-content">
       
         <!-- Modal Header -->
         <div class="modal-header">
@@ -395,8 +404,12 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-          <form name="modalForm BoardReplyEdit" method="post" action="BoardReplyEditOk.bo">
+          <form name="modalForm BoardReplyEdit" method="post" action="BoardReplyEdit.bo">
          		<textarea rows="4" name="modalContent" id="modalContent" class="form-control"></textarea>
+	          <input type="hidden" name="modalIdx" id="modalIdx" /> 
+	          <input type="hidden" name="boardIdx" id="boardIdx" /> 
+	          <input type="hidden" name="pag" id="pag" /> 
+	          <input type="hidden" name="pagSize" id="pagSize" /> 
 	          <input type="submit" value="수정하기" class="btn btn-success mr-2"/>
 					</form> 
         </div>

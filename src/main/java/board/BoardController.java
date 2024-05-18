@@ -96,7 +96,7 @@ public class BoardController extends HttpServlet {
 		else if(com.equals("/BoardReplyEdit")) {
 			command = new BoardReplyEditCommand();
 			command.execute(request, response);
-			return;
+			viewPage = "/include/message.jsp";
 		}
 		
 		
