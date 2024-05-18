@@ -190,38 +190,6 @@
     	});
     }
     
-    /* 
-    // 댓글 수정하기
-    function replyEdit(idx) {
-    	let ans = confirm("선택한 댓글을 수정하시겠습니까?");
-    	if(!ans) return false;
-    	
-    	$.ajax({
-    		url  : "BoardReplyEdit.bo",
-    		type : "post",
-    		data : {idx : idx},
-    		success: function(response) {
-		      // 서버 응답이 JSON 형식이라고 가정합니다.
-		      let vo = JSON.parse(response);
-		      
-		      if (vo != null) {
-		        // 응답에서 content 값을 추출하여 textarea에 설정합니다.
-		        $('#modal-content').val(vo.content);
-		        
-		        // 모달 창을 표시합니다.
-		        $('#myModal2').modal('show');
-		      } else {
-		        alert("수정 실패");
-		      }
-		    },
-    		error : function() {
-    			
-    			alert("전송 오류!");
-    		}
-    	});
-    }
-     */
-    
  		// 댓글 수정하기
 		function replyEdit(modalIdx, content, boardIdx, pag, pagSize) {
   		$("#myModal2 #modalIdx").val(modalIdx);

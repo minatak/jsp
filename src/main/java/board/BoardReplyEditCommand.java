@@ -24,7 +24,7 @@ public class BoardReplyEditCommand implements BoardInterface {
 		
 		BoardDAO dao = new BoardDAO();
 		
-		int res = dao.setBoardReplyEdit(vo	);
+		int res = dao.setBoardReplyEdit(vo);
 		
 		if(res != 0) request.setAttribute("message", "댓글이 수정되었습니다.");
 		else request.setAttribute("message", "댓글 수정 실패");
