@@ -21,10 +21,9 @@ public class MemberController extends HttpServlet {
 		String com = request.getRequestURI();
 		com = com.substring(com.lastIndexOf("/"), com.lastIndexOf("."));
 		
-		// 인증 처리..
+		// 인증....처리.....
 		HttpSession session = request.getSession();
 		int level = session.getAttribute("sLevel")==null ? 999 : (int) session.getAttribute("sLevel");
-		
 		
 		if(com.equals("/MemberLogin")) {
 			viewPage += "/memberLogin.jsp";
@@ -58,24 +57,19 @@ public class MemberController extends HttpServlet {
 			return;
 		}
 		else if(level > 4) {
-			request.setAttribute("message", "로그인 후 사용하세요");
+			request.setAttribute("message", "로그인후 사용하세요");
 			request.setAttribute("url", request.getContextPath()+"/MemberLogin.mem");
 			viewPage = "/include/message.jsp";
 		}
 		else if(com.equals("/MemberMain")) {
-			command = new MemberMainCommand(); 
+			command = new MemberMainCommand();
 			command.execute(request, response);
 			viewPage += "/memberMain.jsp";
-		}
-		else if(com.equals("/cntSearch")) { // 숙제했던것..
-			command = new MemberCntSearchCommand();
-			command.execute(request, response);
-			return;
 		}
 		else if(com.equals("/MemberList")) {
 			command = new MemberListCommand();
 			command.execute(request, response);
-			viewPage += "/memberList.jsp";;
+			viewPage += "/memberList.jsp";
 		}
 		else if(com.equals("/MemberSearch")) {
 			command = new MemberSearchCommand();
@@ -118,9 +112,14 @@ public class MemberController extends HttpServlet {
 			command.execute(request, response);
 			viewPage = "/include/message.jsp";
 		}
+		else if(com.equals("/MemberChatInput")) {
+			command = new MemberChatInputCommand();
+			command.execute(request, response);
+			return;
+		}
 		
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);  
+		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);		
 	}
 }

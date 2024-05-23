@@ -22,7 +22,7 @@
 	    </c:if>
       <c:if test="${level <= 4 && (level > 1 || level == 0)}">
 	      <li class="nav-item">
-	        <a class="nav-link" href="#">PDS</a>
+	        <a class="nav-link" href="PdsList.pds">PDS</a>
 	      </li>    
 	      <li class="nav-item mr-2">
 				  <div class="dropdown">
@@ -64,10 +64,7 @@
 				      <a class="dropdown-item" href="${ctp}/study/database/login.jsp">로그인 연습</a>
 				      <a class="dropdown-item" href="${ctp}/Modal1.st">모달 연습 1</a>
 				      <a class="dropdown-item" href="${ctp}/Modal2.st">모달 연습 2</a>
-				      <a class="dropdown-item" href="${ctp}/FileUpload1.st">싱글파일 업로드</a>
-				      <a class="dropdown-item" href="${ctp}/FileUpload2.st">멀티 파일 업로드2</a>
-				      <a class="dropdown-item" href="${ctp}/FileUpload3.st">멀티 파일 업로드3</a>
-				      <a class="dropdown-item" href="${ctp}/FileUpload4.st">멀티 파일 업로드4</a>
+				      <a class="dropdown-item" href="${ctp}/FileUpload.st">파일 업로드</a>
 				    </div>
 				  </div>
 		    </li>

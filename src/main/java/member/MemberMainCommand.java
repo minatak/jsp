@@ -28,4 +28,5 @@ public class MemberMainCommand implements MemberInterface {
 		request.setAttribute("mVo", mVo);
 		request.setAttribute("guestCnt", gVos.size());
 	}
+
 }

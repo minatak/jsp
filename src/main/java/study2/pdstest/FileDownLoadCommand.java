@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import study2.StudyInterface;
 
-public class FileDownloadCommand implements StudyInterface {
+public class FileDownLoadCommand implements StudyInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -17,10 +17,11 @@ public class FileDownloadCommand implements StudyInterface {
 		
 		String[] files = new File(realPath).list();
 		
-//		for(String file : files) {
-//			System.out.println("file : " + file);
-//		}
-		request.setAttribute("files", files);
+		for(String file : files) {
+			System.out.println("file : " + file);
+		}
+		
+		request.setAttribute("files", files);		
 	}
 
 }

@@ -20,7 +20,7 @@ public class FileUpload2OkCommand implements StudyInterface {
 		String encoding = "UTF-8";
 		
 		MultipartRequest multipartRequest = new MultipartRequest(request, realPath, maxSize, encoding, new DefaultFileRenamePolicy());
-	
+		
 		String oFileName1 = multipartRequest.getOriginalFileName("fName1");
 		String oFileName2 = multipartRequest.getOriginalFileName("fName2");
 		String oFileName3 = multipartRequest.getOriginalFileName("fName3");
@@ -29,20 +29,18 @@ public class FileUpload2OkCommand implements StudyInterface {
 		String fsName2 = multipartRequest.getFilesystemName("fName2");
 		String fsName3 = multipartRequest.getFilesystemName("fName3");
 		
-		System.out.println("원본 파일명1 : " + oFileName1);
-		System.out.println("원본 파일명2 : " + oFileName2);
-		System.out.println("원본 파일명3 : " + oFileName3);
-		
+		System.out.println("원본파일명1 : " + oFileName1);
+		System.out.println("원본파일명2 : " + oFileName2);
+		System.out.println("원본파일명3 : " + oFileName3);
 		System.out.println("서버에 저장된 파일명1 : " + fsName1);
 		System.out.println("서버에 저장된 파일명2 : " + fsName2);
 		System.out.println("서버에 저장된 파일명3 : " + fsName3);
 		
-		
 		if(oFileName1 != null && !oFileName1.equals("")) {
-			request.setAttribute("message", "파일이 업로드되었습니다.");
+			request.setAttribute("message", "파일이 업로드 되었습니다.");
 		}
 		else {
-			request.setAttribute("message", "파일 업로드에 실패했습니다.");
+			request.setAttribute("message", "파일 업로드 실패~~");
 		}
 		
 		request.setAttribute("url", "FileUpload2.st");

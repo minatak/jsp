@@ -23,7 +23,6 @@
     	//demo.innerHTML = fName;
     	
     	let fileSize1 = document.getElementById("file1").files[0].size;
-
     	if(fileSize1 > maxSize) {
     		alert("업로드할 1개 파일의 최대용량은 10MByte입니다.");
     	}
@@ -35,22 +34,22 @@
     	}
     }
     
-    // 파일 박스 추가하기 (동적폼)
+    // 파일 박스 추가하기
     let cnt = 1;
     function fileBoxAppend() {
     	cnt++;
-			let fileBox = '';
-			fileBox += '<div id="fBox'+cnt+'">';
-			fileBox += '<input type="file" name="fName'+cnt+'" id="file'+cnt+'" class="form-control-file border mb-2" style="float:left; width:85%;" />';
-			fileBox += '<input type="button" value="삭제" onclick="deleteBox('+cnt+')" class="btn btn-danger mb-2 ml-2" style="width:10%;" />';
-			fileBox += '</div>';
-			$("#fileBox").append(fileBox); // html(), text(), append();
-		}
+    	let fileBox = '';
+    	fileBox += '<div id="fBox'+cnt+'">';
+    	fileBox += '<input type="file" name="fName'+cnt+'" id="file'+cnt+'" class="form-control-file border mb-2" style="float:left; width:85%;" />';
+    	fileBox += '<input type="button" value="삭제" onclick="deleteBox('+cnt+')" class="btn btn-danger mb-2 ml-2" style="width:10%;" />';
+    	fileBox += '</div>';
+    	$("#fileBox").append(fileBox);		// html(), text(), append()
+    }
     
-    // 파일박스 삭제
+    // 파일 박스 삭제
     function deleteBox(cnt) {
-			$("#fBox"+cnt).remove();
-		}
+    	$("#fBox"+cnt).remove();
+    }
   </script>
 </head>
 <body>
@@ -72,9 +71,11 @@
     <input type="button" value="파일전송" onclick="fCheck()" class="btn btn-success form-control"/>
     <input type="hidden" name="nickName" value="${sNickName}"/>
   </form>
-  <img id="demoImg" width="200px"/>
   <hr/>
-  <div><a href="#" class="btn btn-primary form-control">다운로드폴더로 이동하기</a></div>
+  <div class="row">
+  	<div class="col"><a href="FileDownLoad.st" class="btn btn-primary form-control">다운로드폴더로 이동하기</a></div>
+  	<div class="col text-center"><a href="FileUpload.st" class="btn btn-warning form-control">돌아가기</a></div>
+  </div>
 </div>
 <p><br/></p>
 <jsp:include page="/include/footer.jsp" />
