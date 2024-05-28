@@ -12,12 +12,11 @@ public class WmDeleteOneCommand implements WebMessageInterface {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int idx = request.getParameter("idx")==null ? 0 : Integer.parseInt(request.getParameter("idx"));
 		int mFlag = request.getParameter("mFlag")==null ? 0 : Integer.parseInt(request.getParameter("mFlag"));
-
+		
 		WebMessageDAO dao = new WebMessageDAO();
 		
 		int res = dao.wmDeleteCheck(idx, mFlag);
 		
-
 		response.getWriter().write(res + "");
 	}
 

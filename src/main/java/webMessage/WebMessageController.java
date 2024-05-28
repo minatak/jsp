@@ -45,15 +45,25 @@ public class WebMessageController extends HttpServlet {
 			command.execute(request, response);
 			viewPage = "/include/message.jsp";
 		}
-		else if(com.equals("/WmDelteOne")) {
+		else if(com.equals("/WmDeleteOne")) {
 			command = new WmDeleteOneCommand();
 			command.execute(request, response);
 			return;
 		}
-		else if(com.equals("/WmDelteAll")) {
-			command = new WmDelteAllCommand();
+		else if(com.equals("/WmDeleteAll")) {
+			command = new WmDeleteAllCommand();
 			command.execute(request, response);
 			return;
+		}
+		else if(com.equals("/IdSearchCheck")) {
+			command = new IdSearchCheckCommand();
+			command.execute(request, response);
+			viewPage += "/webMessage.jsp";
+		}
+		else if(com.equals("/WmRestore")) {
+			command = new WmRestoreCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
