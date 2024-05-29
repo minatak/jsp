@@ -68,8 +68,8 @@
     function memberDeleteOk(idx) {
     	let ans = confirm("선택하신 회원을 영구 삭제 하시겠습니까?");
     	if(ans) {
-    		$.ajax({
-    			url  : "MemberDeleteOk.ad",
+    		$.ajax({MemberDeleteOk
+    			url  : ".ad",
     			type : "post",
     			data : {idx : idx},
     			success:function(res) {

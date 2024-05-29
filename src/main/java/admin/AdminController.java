@@ -79,7 +79,7 @@ public class AdminController extends HttpServlet {
 			command.execute(request, response);
 			viewPage += "/member/memberList.jsp";
 		}
-		else if(com.equals("/MemberLevelChange")) {
+		else if(com.equals("/MemberLevelChange")) { 
 			command = new MemberLevelChangeCommand();
 			command.execute(request, response);
 			return;
