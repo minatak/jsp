@@ -10,16 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import admin.board.BoardContentCommand;
-import admin.board.BoardListCommand;
-import admin.complaint.BoardComplaintInputCommand;
-import admin.complaint.ComplaintCheckCommand;
-import admin.complaint.ComplaintListCommand;
-import admin.member.MemberDeleteOkCommand;
-import admin.member.MemberLevelChangeCommand;
-import admin.member.MemberLevelSelectCheckCommand;
-import admin.member.MemberListCommand;
-
 @SuppressWarnings("serial")
 @WebServlet("*.pds")
 public class PdsController extends HttpServlet {

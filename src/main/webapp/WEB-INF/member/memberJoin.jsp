@@ -12,7 +12,7 @@
   <script src="${ctp}/js/woo.js"></script>
   <script>
     'use strict';
-    
+    	
     let idCheckSw = 0;
     let nickCheckSw = 0;
     

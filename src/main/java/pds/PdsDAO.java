@@ -137,10 +137,10 @@ public class PdsDAO {
 		return res;
 	}
 
-	// 파일 다운로드 횟수 증가하기 
+	// 파일 다운횟수 증가하기
 	public void setPdsDownNumCheck(int idx) {
 		try {
-			sql = "update pds set downNum = downNum + 1 where idx=?";
+			sql = "update pds set downNum = downNum + 1 where idx = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 			pstmt.executeUpdate();
@@ -151,7 +151,7 @@ public class PdsDAO {
 		}
 	}
 
-	// 자료실 idx로 개별검색처리
+	// 자료식 idx로 개별검색처리
 	public PdsVO getPdsIdxSearch(int idx) {
 		PdsVO vo = new PdsVO();
 		try {
@@ -188,11 +188,11 @@ public class PdsDAO {
 		return vo;
 	}
 
-	// 자료실의 파일 삭제하기 
+	// 자료실의 파일 삭제하기
 	public int setPdsDeleteCheck(int idx) {
 		int res = 0;
 		try {
-			sql = "delete from pds where idx=?";
+			sql = "delete from pds where idx = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 			res = pstmt.executeUpdate();
